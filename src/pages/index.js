@@ -1,4 +1,5 @@
 import React from "react";
+import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,14 +10,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  center: {
-    display: "flex",
-    width: "100%",
-    height: "1vh",
-    justifyContent: "center",
-    alignContent: "center",
-    borderStyle: "dashed",
   },
   margin: {
     margin: theme.spacing(1),
