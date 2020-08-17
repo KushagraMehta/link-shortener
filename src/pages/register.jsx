@@ -1,5 +1,17 @@
 import React from "react";
+import Head from "../Component/head";
+
+import { Container } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 export default function Register() {
-  return <div>REgister</div>;
+  return (
+    <React.Fragment>
+      <Head title="Register" />
+
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+      </Container>
+    </React.Fragment>
+  );
 }
