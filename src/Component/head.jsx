@@ -24,7 +24,7 @@ export default function Head({ title }) {
       <Helmet title={`${title} | link-shortener`} />
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h4" className={classes.title}>
             {title}
           </Typography>
         </Toolbar>

@@ -1,8 +1,9 @@
 import React from "react";
-import Home from "./pages/home";
-import Login from "./pages/login";
-import Register from "./pages/register";
-import PageNotFound from "./pages/PageNotFound";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import CheckLink from "./Component/CheckLink";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route>
-          <PageNotFound />
+        <Route path="/:urlLink">
+          <CheckLink />
         </Route>
       </Switch>
     </Router>
