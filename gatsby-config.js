@@ -6,5 +6,8 @@
 
 module.exports = {
   /* Your site config here */
-  plugins: [],
-}
+  siteMetadata: {
+    title: "LinkMini",
+  },
+  plugins: ["gatsby-plugin-react-helmet", "gatsby-plugin-material-ui"],
+};

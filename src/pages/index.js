@@ -2,7 +2,10 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+import Head from "../Component/head";
+// import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -18,25 +21,29 @@ const useStyles = makeStyles(theme => ({
 export default function Home() {
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xl" disableGutters>
       <CssBaseline />
+      <Head title="Home" />
+
       <div className={classes.paper}>
-        <Button
-          className={classes.margin}
-          variant="outlined"
-          color="primary"
-          href={"/login"}
-        >
-          Login
-        </Button>
-        <Button
-          className={classes.margin}
-          variant="outlined"
-          color="secondary"
-          href={"/register"}
-        >
-          Register
-        </Button>
+        <Box component="span">
+          <Button
+            className={classes.margin}
+            variant="outlined"
+            color="primary"
+            href={"/login"}
+          >
+            Login
+          </Button>
+          <Button
+            className={classes.margin}
+            variant="outlined"
+            color="secondary"
+            href={"/register"}
+          >
+            Register
+          </Button>
+        </Box>
       </div>
     </Container>
   );
