@@ -1,13 +1,12 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
 
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -20,18 +19,9 @@ const useStyles = makeStyles(theme => ({
 }));
 export default function Head({ title }) {
   const classes = useStyles();
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
   return (
     <React.Fragment>
-      <Helmet title={`${title} | ${data.site.siteMetadata.title}`} />
+      <Helmet title={`${title} | link-shortener`} />
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
