@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "../Component/Head";
+import firebase from "../Component/firebase";
+import { useHistory } from "react-router-dom";
 
 import { Container } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -94,6 +96,15 @@ export default function Register() {
       setConfirmPasswordData({ value: event.target.value });
     else setEmailData({ value: event.target.value });
   };
+  async function AuthButton() {
+    let history = useHistory();
+    try {
+      await firebase.register(emailData, passwordData);
+      history.replace("/dashboard");
+    } catch (error) {
+      alert(error.message);
+    }
+  }
   return (
     <React.Fragment>
       <Head title="Register" />
