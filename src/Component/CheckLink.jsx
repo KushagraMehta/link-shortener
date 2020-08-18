@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PageNotFound from "../pages/PageNotFound";
 
 export default function CheckLink() {
