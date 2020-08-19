@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
+import NightsStayIcon from "@material-ui/icons/NightsStay";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +17,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-export default function Head({ title }) {
+export default function Head({ title, toggleTheme }) {
+  const [darkMode, setDarkMode] = useState(true);
+  const toggleDarkmode = () => {
+    toggleTheme();
+    setDarkMode(!darkMode);
+  };
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -27,6 +32,9 @@ export default function Head({ title }) {
           <Typography variant="h4" className={classes.title}>
             {title}
           </Typography>
+          <Button onClick={toggleDarkmode}>
+            {darkMode ? <NightsStayIcon /> : <WbSunnyIcon />}
+          </Button>
         </Toolbar>
       </AppBar>
     </React.Fragment>

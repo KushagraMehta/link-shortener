@@ -3,14 +3,16 @@ import Head from "../Component/Head";
 import firebase from "../Component/firebase";
 import { useHistory } from "react-router-dom";
 
-import { Container } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+import {
+  Container,
+  CssBaseline,
+  Avatar,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register() {
+export default function Register({ toggleTheme }) {
   const classes = useStyles();
 
   const [isInValid, setIsInValid] = useState(true);
@@ -107,7 +109,7 @@ export default function Register() {
   }
   return (
     <React.Fragment>
-      <Head title="Register" />
+      <Head title="Register" toggleTheme={toggleTheme} />
 
       <Container component="main" maxWidth="xs">
         <CssBaseline />

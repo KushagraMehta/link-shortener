@@ -1,13 +1,11 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
+import { Container, CssBaseline, Button, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Head from "../Component/Head";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
+    height: "80vh",
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
@@ -17,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-export default function Home() {
+export default function Home({ toggleTheme }) {
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="xl" disableGutters>
       <CssBaseline />
-      <Head title="Home" />
+      <Head title="Home" toggleTheme={toggleTheme} />
 
       <div className={classes.paper}>
         <Box component="span">
