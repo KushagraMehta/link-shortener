@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,12 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-export default function Head({ title, toggleTheme }) {
-  const [darkMode, setDarkMode] = useState(true);
-  const toggleDarkmode = () => {
-    toggleTheme();
-    setDarkMode(!darkMode);
-  };
+export default function Head({ title, darkMode, toggleTheme }) {
   const classes = useStyles();
   return (
     <HelmetProvider>
@@ -34,7 +29,7 @@ export default function Head({ title, toggleTheme }) {
           <Typography variant="h4" className={classes.title}>
             {title}
           </Typography>
-          <Button onClick={toggleDarkmode}>
+          <Button onClick={toggleTheme}>
             {darkMode ? <NightsStayIcon /> : <WbSunnyIcon />}
           </Button>
         </Toolbar>

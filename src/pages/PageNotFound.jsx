@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
-import Head from "../Component/Head";
-export default function PageNotFound({ toggleTheme }) {
+export default function PageNotFound({ setTitle }) {
+  useEffect(() => setTitle("404-Page not found"), [setTitle]);
   return (
     <Container component="main" maxWidth="xl" disableGutters>
-      <Head title="404-Page not found" toggleTheme={toggleTheme} />
       <div>404 page not found</div>
     </Container>
   );

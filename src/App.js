@@ -1,4 +1,5 @@
 import React, { useState, Suspense, lazy } from "react";
+import Head from "./Component/Head";
 
 import {
   createMuiTheme,
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [darkMode, setDarkMode] = useState(true);
+  const [title, setTitle] = useState("Home");
   const theme = React.useMemo(
     () =>
       createMuiTheme({
@@ -41,6 +43,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Head title={title} darkMode={darkMode} toggleTheme={toggleTheme} />
         <Suspense
           fallback={
             <div className={classes.loading}>
@@ -50,19 +53,19 @@ function App() {
         >
           <Switch>
             <Route exact path="/login">
-              <Login toggleTheme={toggleTheme} />
+              <Login setTitle={setTitle} />
             </Route>
             <Route exact path="/register">
-              <Register toggleTheme={toggleTheme} />
+              <Register setTitle={setTitle} />
             </Route>
             <Route exact path="/dashboard">
-              <Dashboard toggleTheme={toggleTheme} />
+              <Dashboard setTitle={setTitle} />
             </Route>
             <Route exact path="/">
-              <Home toggleTheme={toggleTheme} />
+              <Home setTitle={setTitle} />
             </Route>
             <Route path="/:urlLink">
-              <CheckLink toggleTheme={toggleTheme} />
+              <CheckLink setTitle={setTitle} />
             </Route>
           </Switch>
         </Suspense>

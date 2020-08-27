@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Container, CssBaseline, Button, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Head from "../Component/Head";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -16,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-export default function Home({ toggleTheme }) {
+export default function Home({ setTitle }) {
   const classes = useStyles();
+  useEffect(() => setTitle("Home"), [setTitle]);
   return (
     <Container component="main" maxWidth="xl" disableGutters>
       <CssBaseline />
-      <Head title="Home" toggleTheme={toggleTheme} />
 
       <div className={classes.paper}>
         <Box component="span">

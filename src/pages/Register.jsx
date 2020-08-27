@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Head from "../Component/Head";
 import firebase from "../Component/firebase";
-import { useHistory } from "react-router-dom";
 
 import {
   Container,
@@ -35,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register({ toggleTheme }) {
+export default function Register({ setTitle }) {
   const classes = useStyles();
 
+  const [userName, setUserName] = useState({ firstName: "", lastName: "" });
   const [isInValid, setIsInValid] = useState(true);
   const [emailData, setEmailData] = useState({ value: "", error: false });
   const [passwordData, setPasswordData] = useState({ value: "" });
@@ -46,6 +45,7 @@ export default function Register({ toggleTheme }) {
     error: false,
     helperText: "",
   });
+  useEffect(() => setTitle("Register"), [setTitle]);
   useEffect(() => {
     let error =
       confirmPasswordData.value !== passwordData.value &&
@@ -96,139 +96,152 @@ export default function Register({ toggleTheme }) {
       setPasswordData({ value: event.target.value });
     else if (event.target.id === "confirmpassword")
       setConfirmPasswordData({ value: event.target.value });
-    else setEmailData({ value: event.target.value });
+    else if (event.target.id === "email")
+      setEmailData({ value: event.target.value });
+    else if (event.target.id === "firstName")
+      setUserName({
+        firstName: event.target.value,
+        lastName: userName.lastName,
+      });
+    else if (event.target.id === "lastName")
+      setUserName({
+        firstName: userName.firstName,
+        lastName: event.target.value,
+      });
   };
   async function AuthButton() {
-    let history = useHistory();
     try {
-      await firebase.register(emailData, passwordData);
-      history.replace("/dashboard");
+      await firebase.register(
+        `${userName.firstName} ${userName.lastName}`,
+        emailData.value,
+        passwordData.value
+      );
+      // console.log(firebase.auth.onAuthStateChanged());
+      // history.replace("/dashboard");
     } catch (error) {
       alert(error.message);
     }
   }
   return (
-    <React.Fragment>
-      <Head title="Register" toggleTheme={toggleTheme} />
-
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <form className={classes.form} action="/signup" method="POST">
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  type="text"
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  type="text"
-                  name="lastName"
-                  autoComplete="lname"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  type="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  error={emailData.error}
-                  onChange={inputHandler}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  error={
-                    passwordData.value.length <=
-                      confirmPasswordData.value.length &&
-                    passwordData.value.length !== 0
-                      ? passwordError.error
-                      : false
-                  }
-                  helperText={
-                    passwordData.value.length <=
-                      confirmPasswordData.value.length &&
-                    passwordData.value.length !== 0
-                      ? passwordError.helperText
-                      : ""
-                  }
-                  autoComplete="current-password"
-                  onChange={inputHandler}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="confirmpassword"
-                  label="Confirm Password"
-                  type="password"
-                  id="confirmpassword"
-                  error={
-                    confirmPasswordData.value.length <=
-                      passwordData.value.length &&
-                    confirmPasswordData.value.length !== 0
-                      ? passwordError.error
-                      : false
-                  }
-                  helperText={
-                    confirmPasswordData.value.length <=
-                      passwordData.value.length &&
-                    confirmPasswordData.value.length !== 0
-                      ? passwordError.helperText
-                      : ""
-                  }
-                  autoComplete="current-password"
-                  onChange={inputHandler}
-                />
-              </Grid>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <form className={classes.form} action="/signup" method="POST">
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
+                required
+                fullWidth
+                type="text"
+                id="firstName"
+                label="First Name"
+                autoFocus
+                onChange={inputHandler}
+              />
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              disabled={isInValid}
-            >
-              Sign Up
-            </Button>
-          </form>
-        </div>
-      </Container>
-    </React.Fragment>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                type="text"
+                name="lastName"
+                autoComplete="lname"
+                onChange={inputHandler}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                type="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                error={emailData.error}
+                onChange={inputHandler}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                error={
+                  passwordData.value.length <=
+                    confirmPasswordData.value.length &&
+                  passwordData.value.length !== 0
+                    ? passwordError.error
+                    : false
+                }
+                helperText={
+                  passwordData.value.length <=
+                    confirmPasswordData.value.length &&
+                  passwordData.value.length !== 0
+                    ? passwordError.helperText
+                    : ""
+                }
+                autoComplete="current-password"
+                onChange={inputHandler}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="confirmpassword"
+                label="Confirm Password"
+                type="password"
+                id="confirmpassword"
+                error={
+                  confirmPasswordData.value.length <=
+                    passwordData.value.length &&
+                  confirmPasswordData.value.length !== 0
+                    ? passwordError.error
+                    : false
+                }
+                helperText={
+                  confirmPasswordData.value.length <=
+                    passwordData.value.length &&
+                  confirmPasswordData.value.length !== 0
+                    ? passwordError.helperText
+                    : ""
+                }
+                autoComplete="current-password"
+                onChange={inputHandler}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            onClick={AuthButton}
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={isInValid}
+          >
+            Sign Up
+          </Button>
+        </form>
+      </div>
+    </Container>
   );
 }
