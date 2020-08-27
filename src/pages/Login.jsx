@@ -1,4 +1,6 @@
 import React from "react";
+
+import { Link as RouterLink } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -84,7 +86,7 @@ export default function SignIn({ toggleTheme }) {
               Sign In
             </Button>
             <Grid container>
-              <Link href="/register" variant="body2">
+              <Link component={RouterLink} to="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

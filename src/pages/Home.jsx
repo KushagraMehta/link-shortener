@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { Container, CssBaseline, Button, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Head from "../Component/Head";
@@ -25,18 +26,20 @@ export default function Home({ toggleTheme }) {
       <div className={classes.paper}>
         <Box component="span">
           <Button
+            component={RouterLink}
             className={classes.margin}
             variant="outlined"
             color="primary"
-            href={"/login"}
+            to="/login"
           >
             Login
           </Button>
           <Button
+            component={RouterLink}
             className={classes.margin}
             variant="outlined"
             color="secondary"
-            href={"/register"}
+            to="/register"
           >
             Register
           </Button>
