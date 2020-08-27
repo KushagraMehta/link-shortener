@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
@@ -25,8 +25,10 @@ export default function Head({ title, toggleTheme }) {
   };
   const classes = useStyles();
   return (
-    <React.Fragment>
-      <Helmet title={`${title} | link-shortener`} />
+    <HelmetProvider>
+      <Helmet>
+        <title>{`${title} | link-shortener`}</title>
+      </Helmet>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h4" className={classes.title}>
@@ -37,6 +39,6 @@ export default function Head({ title, toggleTheme }) {
           </Button>
         </Toolbar>
       </AppBar>
-    </React.Fragment>
+    </HelmetProvider>
   );
 }
